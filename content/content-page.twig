@@ -1,0 +1,23 @@
+<article id="post-${ page.id }" class="page">
+    <header class="entry-header">
+        <h1 class="entry-title">${ page.title }</h1>
+    </header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+        ${ page.body }
+    </div>
+    <!-- .entry-content -->
+
+    <footer class="entry-meta">
+        {# 'independent_publisher_entry_meta_top' #}
+
+        {% if page.editable and page.deletable %}
+        <span class="edit-link">
+            $page.edit_link | $page.delete_link
+        </span>
+        {% endif %}
+    </footer>
+    <!-- .entry-meta -->
+
+</article><!-- #post-${ page.id } -->

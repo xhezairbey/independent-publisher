@@ -1,0 +1,28 @@
+<section class="no-results not-found">
+    <header class="page-header">
+        <h1 class="page-title">${ "Nothing Found" | translate("independent-publisher")) }</h1>
+    </header>
+    <!-- .page-header -->
+
+    <div class="page-content">
+        {% if route.action == "index" and $visitor.group.can("write_post") %}
+
+            <p>${ "Ready to publish your first post? <a href='%s$s'>Get started here</a>." | translate("independent-publisher") | format(admin "write") }
+            </p>
+
+        {% elseif route.action == "search" %}
+
+            <p>${ "Sorry, but nothing matched your search terms. Please try again with some different keywords." | translate('independent-publisher') }</p>
+
+            {% include "content/search.twig" %}
+
+        {% else %}
+
+            <p>$( "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help." | translate('independent-publisher') }</p>
+
+            {% include "content/search.twig" %}
+
+        {% endif %}
+    </div>
+    <!-- .page-content -->
+</section><!-- .no-results -->

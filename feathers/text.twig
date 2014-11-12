@@ -1,0 +1,11 @@
+{% extends "content/post.twig" %}
+
+{% block title %}
+    {% if post['title'] %}
+    <a href="$post.url" rel="bookmark" title="$post.title">${ post.title }</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    ${ post.body | read_more("Continue Reading →") }
+{% endblock %}

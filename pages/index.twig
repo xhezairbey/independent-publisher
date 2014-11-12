@@ -1,0 +1,38 @@
+<!-- @file pages/index.twig -->
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+    <div id="primary" class="content-area">
+        <main id="content" class="site-content" role="main">
+
+            {# Start the Loop #}
+            {% for post in posts.paginated %}
+
+            {# Include the Post-Format-specific template for the content. #}
+            {% include "feathers/" ~ post.feather ~ ".twig" %}
+
+            {% else %}
+
+                {% include "content/content-none.twig" %}
+
+            {% endfor %}
+
+            <nav role="navigation" id="nav-below" class="site-navigation paging-navigation">
+                <h1 class="screen-reader-text">Post navigation
+                    {% if posts.paginated and posts.pages > 1 %}
+                        ${ "Page %d of %d" | translate | format(posts.page, posts.pages) }
+                    {% endif %}
+                </h1>
+                <div class="nav-previous">
+                    ${ posts.next_link("<button><span class=\"meta-nav\">←</span> Older posts</button>") }
+                </div>
+
+                <div class="nav-next">
+                    ${ posts.prev_link("<button>Newer posts <span class=\"meta-nav\">→</span></button>") }
+                </div>
+            </nav>
+        </main>
+        <!-- #content .site-content -->
+    </div>
+    <!-- #primary .content-area -->
+{% endblock %}

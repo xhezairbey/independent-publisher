@@ -1,0 +1,28 @@
+        <li id="li-comment-$comment.id" class="comment even thread-even" {% if comment.parent_id > 0 %}  {% endif %}>
+            {% if comment.status == "denied" %}
+            <span class="waiting">${ "Your comment is awaiting moderation." | translate }</span>
+            {% endif %}
+            <article id="comment-71" class="comment">
+                <footer>
+                    <div class="comment-author vcard">
+                        <img alt="" src="${ comment.author_email | get_gravatar }" class="avatar avatar-48 photo" height="48" width="48">
+                        ${ "<cite class=\"fn\">%s</cite>" | translate | format(comment.author_link) }
+                    </div>
+                    <div class="comment-meta alignright">
+                        ${ comment.edit_link("Edit" | translate, "") }
+                        |
+                        ${ comment.delete_link("Delete" | translate, "") }
+                    </div>
+                    <div class="comment-meta commentmetadata">
+                        ${ "<a href=\"%s\"><time pubdate datetime=\"%s\">%s</time></a>" | translate | format(comment.post.url ~ "#comment-"~comment.id, comment.created_at, comment.created_at | strftime("%B %d, %Y")) }
+                    </div>
+                </footer>
+                <div class="comment-content ">
+                    <p>$comment.body</p>
+                </div>
+                <div class="reply">
+                    <a class="comment-reply-link" href="${ post.url }/?replytocom=71#respond" onclick="return addComment.moveForm(&quot;comment-71&quot;, &quot;71&quot;, &quot;respond&quot;, &quot;189&quot;)">Reply to Ali</a>
+                    {% if comment.parent_id < 1 %} ${ comment.replyto_link("Reply" | translate, "") }{% endif %}
+                </div>
+            </article>
+        </li>

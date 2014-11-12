@@ -1,0 +1,33 @@
+    <div class="post-author-bottom">
+        {# independent_publisher_posted_author_bottom_card() #}
+        <div class="post-author-card">
+            <a class="site-logo" href="${ site.url }">
+                <img alt="" src="${ post.author.email | get_gravatar }" class="avatar avatar-100 photo" height="100" width="100">
+            </a>
+            <div class="post-author-info">
+                <h1 class="site-title">
+                    <span class="byline">
+                        <span class="author vcard">
+                            <a class="url fn n" href="${ site.url }" title="${ site.name }" rel="author">${ post.author.name }</a>
+                        </span>
+                    </span>
+                </h1>
+                <h2 class="site-description">
+                Believer, Writer, Speaker and Engineer.
+
+                <a href="http://twitter.com/PoentaLabs">@PoentaLabs</a> founder &
+                <a href="http://twitter.com/chyrp">@chyrp</a> lead developer.
+                <br><br>
+                Say hello <a href="http://twitter.com/_xhezairi">@_xhezairi</a>.
+                </h2>
+            </div>
+            <div class="post-published-date">
+                <h2 class="site-published">Published</h2>
+                <h2 class="site-published-date">
+                    <a href="${ post.url }" title="${ post.title }" rel="bookmark">
+                        <time class="entry-date" datetime="${ post.created_at | strftime("%Y-%m-%d") }" pubdate="pubdate">${ post.created_at | strftime("%B %d, %Y") }</time>
+                    </a>
+                </h2>
+            </div>
+        </div>
+    </div>

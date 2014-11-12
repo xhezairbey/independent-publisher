@@ -1,0 +1,87 @@
+    <header id="masthead" class="site-header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+
+        <div class="site-header-info">
+            {% if route.action == 'view' %}
+                <!-- Show only post author info on Single Pages -->
+                <!-- independent_publisher_posted_author_card() -->
+                <a class="site-logo" href="${ site.url }">
+                    <img alt="Arian Xhezairi" src="${ post.author.email | get_gravatar }" class="avatar avatar-100 photo" height="100" width="100">
+                </a>
+
+                <h1 class="site-title">
+                    <span class="byline">
+                        <span class="author vcard">
+                            <a class="url fn n" href="${ site.url }" title="${ site.title }" rel="author">${ post.author.name }</a>
+                        </span>
+                    </span>
+                </h1>
+                <h2 class="site-description">
+                Believer, Writer, Speaker, Engineer. Father of one.
+                <br><br>
+                <a href="http://twitter.com/PoentaLabs">@PoentaLabs</a> founder &
+                <a href="http://twitter.com/chyrp">@chyrp</a> lead developer.
+                <br><br>
+                Say hello <a href="http://twitter.com/_xhezairi">@_xhezairi</a>.
+                </h2>
+
+                <div id="menu-social" class="menu">
+                    <ul id="menu-social-items" class="menu-items">
+                        <li><a href="http://twitter.com/_xhezairi">
+                            <span class="screen-reader-text">Twitter</span></a>
+                        </li>
+                        <li><a href="http://facebook.com/xhezairi">
+                            <span class="screen-reader-text">Facebook</span></a>
+                        </li>
+                        <li><a href="http://github.com/xhezairi/">
+                            <span class="screen-reader-text">GitHub</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="site-published-separator"></div>
+
+                    <h2 class="site-published">Published</h2>
+                    <h2 class="site-published-date">
+                        <a href="${ post.url }" title="${ post.title }" rel="bookmark">
+                            <time class="entry-date" datetime="${ post.created_at | strftime("%Y-%m-%d") }" pubdate="pubdate">${ post.created_at | strftime("%d %B %Y") }</time>
+                        </a>
+                    </h2>
+            {% else %}
+                <!-- Show Header Image, Site Title, and Site Tagline on everything except Single Pages -->
+
+            <a class="site-logo" href="${ site.url }" title="${ site.name }" rel="home">
+                <img class="no-grav" src="${ theme.url }/images/logo.png" height="293" width="293" alt="${ site.name }" />
+            </a>
+
+            <h1 class="site-title">
+                <a href="${ site.url }" title="${ site.name }" rel="home">Arian Xhezairi</a>
+            </h1>
+            <h2 class="site-description">${ site.description }</h2>
+            {# get_template_part( 'menu', 'social' ); #}
+
+            {% endif %}
+        </div>
+
+        {# Show navigation menu on everything except Single pages, unless Show Primary Nav Menu on Single Pages is enabled #}
+        {% if route.action != 'view' %}
+        <!-- if ( ! is_single() || independent_publisher_show_nav_on_single() )-->
+            <nav role="navigation" class="site-navigation main-navigation">
+                <a class="screen-reader-text skip-link" href="#content" title="Skip to content">Skip to content</a>
+
+                <!-- Page List -->
+                {% if theme.pages_list %}
+                <div class="menu-primary-menu-container" id="page_list">
+                    <ul id="menu-primary-menu" class="menu">
+                    {% for item in theme.pages_list %}
+                        <li class="menu-item">
+                            <a href="$item.page.url">$item.page.title</a>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </nav><!-- .site-navigation .main-navigation -->
+        {% endif %}
+
+        <?php do_action( 'independent_publisher_header_after' ); ?>
+    </header>
+    <!-- #masthead .site-header -->

@@ -1,0 +1,75 @@
+<article id="post-${ post.id }" class="post format-standard hentry" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    {% if post.featured_image and post.feather == "text" %}
+        ${ post.featured_image('5000px', 0, false) })
+    {% endif %}
+    <header class="entry-header">
+        <h2 class="entry-title-meta">
+            <span class="entry-title-meta-author">
+                $post.author.name
+            </span>
+                in <a href="$post.category.url" rel="tag">$post.category.name</a>
+            <span class="entry-title-meta-post-date">
+                <span class="sep"> | </span>
+                <time datetime="${ post.created_at | strftime("%Y-%m-%d") }" pubdate>${ post.created_at | strftime("%d %B, %Y") }</time>
+            </span>
+            <!-- independent_publisher_entry_title_meta', $separator = | -->
+        </h2>
+        <h1 class="entry-title" itemprop="name">${ post.title }</h1>
+    </header>
+    <!-- .entry-header -->
+    <div class="entry-content" itemprop="mainContentOfPage">
+        ${ post.body | read_more }
+
+<!--         <div class="page-links">
+            ${ "Pages" | translate('independent-publisher') }
+        </div> -->
+    </div>
+    <!-- .entry-content -->
+
+<span class="alignleft">$post.paginated.prev_link</span>
+<span class="alignright">$post.paginated.next_link</span>
+
+<!--     <div class="page-links-next-prev">
+        {% if not post.prev.no_results %}
+            <a class="left prev_post" href="$post.prev.url">
+                <button class="previous-page-nav">
+                    &Lang; ${ post.prev.title | truncate(40) }
+                </button>
+            </a>
+        {% endif %}
+        {% if not post.next.no_results %}
+            <a class="right next_post" href="$post.next.url">
+                <button class="next-page-nav">
+                    ${ post.next.title | truncate(40) } &Rang;
+                </button>
+            </a>
+        {% endif %}
+    </div>
+ -->
+    {% include "partials/author-card.twig" %}
+
+
+    <footer class="entry-meta">
+        ${ trigger.call("independent_publisher_entry_meta_top") }
+
+        <div id="share-comment-button" style="display: block;">
+            <button class="showDisqus">
+                <i class="share-comment-icon"></i>${ "Write a Comment" | translate }
+            </button>
+        </div>
+
+        {# if enabled_modules.comments and post.commentable == "open" #}
+<!--         <div id="share-comment-button" style="display: block;">
+            <button>
+                <i class="share-comment-icon"></i> Write a Comment
+            </button>
+        </div> -->
+        {# else #}
+            {# "Comments are not accepted on this entry." | translate #}
+        {# endif #}
+
+    </footer>
+    <!-- .entry-meta -->
+
+</article>
+<!-- #post-$post.id -->

@@ -1,0 +1,55 @@
+<div id="commentform-top">
+    <div id="respond" class="comment-respond">
+        <form id="add_comment commentform" class="comment-form" novalidate="" action="{% url "add_comment" %}" method="post" accept-charset="utf-8">
+    <input type="hidden" name="last_comment" value="$post.latest_comment" id="last_comment" />
+    <div id="main-reply-title">
+        <h3>${ "Write a Comment" | translate }</h3>
+    </div>
+    <div class="comment-form-reply-title">
+        <p>Comment</p>
+    </div>
+    <p class="comment-form-comment" id="comment-form-field">
+        <textarea id="comment" name="body" rows="6" cols="60" aria-required="true"></textarea>
+    </p>
+    {% if visitor.logged_in %}
+    <p>
+        <span class="who">
+            <a class="logout" href="{% url "logout" %}">${ "Log Out &rarr;" | translate }</a>
+            ${ "Logged in as %s" | translate | format(visitor.full_name | fallback(visitor.login)) }
+        </span>
+    </p>
+    {% else %}
+    <p class="comment-form-author">
+        <label for="author">${ "Your Name" | translate }</label>
+        <input type="text" name="author" id="author" value="" aria-required="true">
+    </p>
+    <p class="comment-form-email">
+        <label for="email">${ "Your E-Mail" | translate }</label>
+        <input type="text" name="email" value="" id="email" />
+    </p>
+    <p class="comment-form-url">
+        <label for="url">${ "Your Website" | translate }</label>
+        <input type="text" name="url" value="" id="url" />
+    </p>
+    {% endif %}
+    <p class="comment-form-subscriptions">
+        <label for="subscribe-reloaded">Notifications</label>
+        <input name="notify" type="checkbox" />
+        <span>${ "Notify me when others comment on this post" | translate }</span>
+    </p>
+
+    <p>
+        {% if visitor.logged_in %}
+        <input type="hidden" name="author" value="${ visitor.full_name | fallback(visitor.login) }" id="author" />
+        <input type="hidden" name="email" value="$visitor.email" id="email" />
+        <input type="hidden" name="url" value="$visitor.website" id="url" />
+        {% endif %}
+        <input type="hidden" name="parent_id" value="${ GET.replytocomment | escape }" id="parent_id" />
+        <input type="hidden" name="post_id" value="$post.id" id="post_id" />
+    </p>
+    <p class="form-submit">
+        <button type="submit" id="submit" name="submit" value="Submit Comment">${ "Speak" | translate }</button>
+    </p>
+        </form>
+    </div>
+</div>

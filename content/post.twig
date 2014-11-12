@@ -1,0 +1,60 @@
+<article id="post-$post.id" class="post hentry format-$post.feather {% if post.pinned %} pinned{% endif %}{% if post.status == 'private' %} private{% endif %}{% if post.status == 'scheduled' %} scheduled{% endif %}" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+    <header class="entry-header">
+        <h1 class="entry-title">
+            {% block title %}{% endblock %}
+        </h1>
+        {#
+        <h2 class="entry-title-meta">
+            <span class="entry-title-meta-author">
+                Written by $post.author.name .
+                Filed under <a href="$post.category.url" rel="tag">$post.category.name</a>.
+                Total of {% if enabled_modules.comments and visitor.group.can("add_comment") %}<a href="$post.url#comments"> ${ "%s Comment" | translate_plural("%s Comments", post.comment_count) | format(post.comment_count) }</a>{% endif %} in the discussion.
+                <span class="entry-title-meta-post-date">
+                    <span class="sep"> |
+                    Published <time datetime="${ post.created_at | strftime("%Y-%m-%d") }" pubdate>${ post.created_at | strftime("%d %B %Y") }</time>
+                    </span>
+                <!-- do_action( 'independent_publisher_entry_title_meta', $separator = ' | ' ) -->
+                </span>
+
+            <!-- <a href="$post.url" rel="bookmark" title="$post.title">$post.title</a> -->
+            </span>
+        </h2>
+        #}
+	</header>
+    <!-- .entry-header -->
+
+    <div class="entry-content">
+    <!-- <a href="${ post.title }"> -->
+        {% block content %}{% endblock %}
+    <!-- </a> -->
+    </div>
+
+    <footer class="entry-meta">
+        <span class="cat-links">
+            ${ post.author.name } in <a href="${ post.category.url }" rel="category tag">${ post.category.name }</a></span>
+
+        <!-- <span class="sep"> |</span> -->
+
+        <!-- <span>32 Words</span> -->
+
+        <span class="sep"> | </span>
+
+        <span class="comments-link">
+            <a href="$post.url#disqus_thread">Comments</a>
+            {# if enabled_modules.comments and visitor.group.can("add_comment") %}<a href="$post.url#comments"> ${ "%s Comment" | translate_plural("%s Comments", post.comment_count) | format(post.comment_count) }</a>{# endif #}
+        </span>
+
+        <span class="sep"> | </span>
+
+        {% if post.editable or post.deletable %}
+        <span class="edit-link">$post.edit_link ${ post.delete_link("Delete" | translate, " | ") }</span>
+        {% endif %}
+
+    </footer>
+
+    {% if route.action == "view" and post.paginated and post.paginated.pages > 1 %}
+        $post.paginated.prev_link
+        $post.paginated.next_link
+        <span class="pages">${ "Page %d of %d" | translate | format(post.paginated.page, post.paginated.pages) }</span>
+    {% endif %}
+</article>

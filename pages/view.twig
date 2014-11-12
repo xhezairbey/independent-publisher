@@ -1,0 +1,29 @@
+{% extends "layouts/default.twig" %}
+
+{% block content %}
+
+    <div id="primary" class="content-area">
+        <main id="content" class="site-content" role="main">
+
+            {# include "feathers/" ~ post.feather ~ ".twig" #}
+
+            {% include "content/content-single.twig" %}
+
+            <div id="comments" class="comments-area">
+                <div id="commentform-top">
+                </div>
+                <div id="disqus_thread respond"></div>
+            </div>
+
+            <div id="taglist">
+                <ul class="taglist">
+                    {% if post.linked_tags | length > 0 %}
+                        <li class="taglist-title">${ "Related Content by Tag" | translate }</li>
+                        <li>${ post.linked_tags | join("<li>") }
+                    {% endif %}
+                </ul>
+            </div>
+        </main>
+    </div>
+
+{% endblock %}
